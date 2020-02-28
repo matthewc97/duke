@@ -58,13 +58,10 @@ public class Storage {
 
     public void writeToFile(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
-        fw.close();
-
         for (Task t : taskList) {
-            fw = new FileWriter("data/duke.txt", true);
             fw.write(t.toFileString() + System.lineSeparator());
-            fw.close();
         }
+        fw.close();
     }
 
 

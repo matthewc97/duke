@@ -27,6 +27,12 @@ public class Ui {
         System.out.println("\t DELETE TASK FROM LIST:");
         System.out.println("\t\t delete <task index>");
         printBorder();
+        System.out.println("\t FIND KEYWORD IN LIST:");
+        System.out.println("\t\t find <keyword>");
+        printBorder();
+        System.out.println("\t EXIT DUKE:");
+        System.out.println("\t\t bye");
+        printBorder();
     }
 
     public static void printDeleteMessage(ArrayList<Task> taskList, int taskIndex) {
@@ -50,6 +56,15 @@ public class Ui {
         printBorder();
     }
 
+    public static void printFindResults(ArrayList<Task> foundList) {
+        printBorder();
+        System.out.println("\t Here are the matching tasks in your list:");
+        for (int i = 0; i < foundList.size(); ++i) { // Print list of tasks
+            System.out.println("\t " + (i + 1) + ". " + foundList.get(i).toString());
+        }
+        printBorder();
+    }
+
     public static void printListCount(ArrayList<Task> taskList) {
         System.out.println("\t Now you have " + taskList.size() + " tasks in the list."); // Print list count
     }
@@ -65,7 +80,7 @@ public class Ui {
 
     public static void printExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("\t  _                \n"
+        System.out.println(" _                \n"
                 + "| |               \n"
                 + "| |__  _   _  ___ \n"
                 + "| '_ \\| | | |/ _ \\\n"
