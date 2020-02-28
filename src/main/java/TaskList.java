@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class TaskList {
     public static final String EMPTY_LIST = "Your task list is empty! Try adding a task first!";
     public static final String INVALID_TASK_INDEX = "The task index you've entered is invalid.";
+    public static final String KEYWORD_NOT_FOUND = "There are no tasks found in the list that match your keyword.";
 
     private ArrayList<Task> taskList;
 
@@ -58,5 +59,18 @@ public class TaskList {
         String deadlineTask = deadlineWords[0];
         String deadlineBy = deadlineWords[1];
         taskList.add(new Deadline(deadlineTask, deadlineBy));
+    }
+
+    public ArrayList<Task> findTask(String findKeywords) throws DukeException {
+        ArrayList<Task> foundList = new ArrayList<>();
+        for (Task t : taskList) {
+            if(t.getTask().toLowerCase().contains(findKeywords.toLowerCase())) {
+                foundList.add(t);
+            }
+        }
+        if (foundList.isEmpty()) {
+            throw new DukeException(KEYWORD_NOT_FOUND);
+        }
+        return foundList;
     }
 }

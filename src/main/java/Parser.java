@@ -7,6 +7,7 @@ public class Parser {
     public static final String EMPTY_DEADLINE = "The description and/or date/time of the deadline cannot be empty.";
     public static final String INVALID_EVENT = "The description of an event must be in this format: \n\t event <task name> /at <date/time>";
     public static final String INVALID_DEADLINE = "The description of a deadline must be in this format: \n\t deadline <task name> /by <date/time>";
+    public static final String EMPTY_FIND = "The keyword for the search cannot be empty.";
 
     public int parseTaskIndex(String[] words, int taskListSize) throws DukeException {
         String taskString = words[1];
@@ -43,6 +44,7 @@ public class Parser {
         if (deadlineWords[0].replaceAll("\\s+","").length() == 0 || deadlineWords[1].replaceAll("\\s+","").length() == 0) {
             throw new DukeException(EMPTY_DEADLINE);
         }
+
         return deadlineWords;
     }
 
@@ -56,5 +58,12 @@ public class Parser {
         if (words.length < 2) {
             throw new DukeException(EMPTY_TASK_INDEX);
         }
+    }
+
+    public String parseFind(String[] words) throws DukeException {
+        if (words.length < 2) {
+            throw new DukeException(EMPTY_FIND);
+        }
+        return words[1];
     }
 }

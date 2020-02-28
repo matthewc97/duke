@@ -36,14 +36,17 @@ public class Duke {
         while (!input.equals("bye")) {
             String[] words = input.split(" ", 2); // Split command from rest of sentence
             try {
-                storage.writeToFile(tasks.getTaskList());
                 manageCommand(words);
             } catch (DukeException e) {
                 ui.printErrorMessage(OOPS + e.getMessage());
-            } catch (IOException e) {
-                ui.printErrorMessage(OOPS + FILE_NOT_FOUND);
             } catch (NumberFormatException e) {
                 ui.printErrorMessage(OOPS + INVALID_NUMBER);
+            }
+
+            try {
+                storage.writeToFile(tasks.getTaskList());
+            } catch (IOException e) {
+                ui.printErrorMessage(OOPS + FILE_NOT_FOUND);
             }
             input = in.nextLine(); // Get string input
         }
@@ -107,6 +110,11 @@ public class Duke {
                 tasks.deleteTask(taskIndex);
                 ui.printListCount(taskList);
                 ui.printBorder();
+                break;
+            case "find":
+                String findKeywords = parser.parseFind(words);
+                ArrayList<Task> foundList = tasks.findTask(findKeywords);
+                ui.printFindResults(foundList);
                 break;
             default:
                 throw new DukeException(INVALID_COMMAND);
